@@ -1,3 +1,7 @@
+<p align="center" >
+  <img src="./Logo/hummingbird.jpg">
+</p>  
+
 Swipe Menu
 ===============
 
