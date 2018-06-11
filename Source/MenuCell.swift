@@ -7,23 +7,21 @@
 //
 
 import UIKit
-import SnapKit
 
 class LeftMenuCell: MenuCell {
     fileprivate override func configCell() {
         super.configCell()
-        
-        iconV.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(margin)
-            make.right.equalTo(titleLb.snp.left).offset(-margin)
-            make.width.height.equalTo(30)
-            make.centerY.equalTo(self)
-        }
-        
-        titleLb.snp.makeConstraints { (make) in
-            make.right.equalTo(self)
-            make.top.bottom.equalTo(self)
-        }
+        iconV.translatesAutoresizingMaskIntoConstraints = false
+        iconV.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        iconV.leftAnchor.constraint(equalTo: leftAnchor, constant: margin).isActive = true
+        iconV.rightAnchor.constraint(equalTo: titleLb.leftAnchor, constant: -margin).isActive = true
+        iconV.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        iconV.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+        titleLb.translatesAutoresizingMaskIntoConstraints = false
+        titleLb.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        titleLb.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        titleLb.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }
 
@@ -31,16 +29,18 @@ class RightMenuCell: MenuCell {
     fileprivate override func configCell() {
         super.configCell()
         titleLb.textAlignment = .right
-        titleLb.snp.makeConstraints { (make) in
-            make.left.equalTo(self)
-            make.top.bottom.equalTo(self)
-        }
-        iconV.snp.makeConstraints { (make) in
-            make.left.equalTo(titleLb.snp.right).offset(margin)
-            make.right.equalTo(self).offset(-margin)
-            make.width.height.equalTo(30)
-            make.centerY.equalTo(self)
-        }
+        
+        iconV.translatesAutoresizingMaskIntoConstraints = false
+        iconV.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        iconV.leftAnchor.constraint(equalTo: titleLb.rightAnchor, constant: margin).isActive = true
+        iconV.rightAnchor.constraint(equalTo: rightAnchor, constant: -margin).isActive = true
+        iconV.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        iconV.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        titleLb.translatesAutoresizingMaskIntoConstraints = false
+        titleLb.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        titleLb.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        titleLb.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }
 
@@ -49,8 +49,8 @@ enum CellStyle {
 }
 
 open class MenuCell: UITableViewCell {
-    static var SelectColor = DefautColor
-    fileprivate let margin = 10
+    static var SelectColor = kDefautColor
+    fileprivate let margin: CGFloat = 10
     
     var style: CellStyle = .normal {
         didSet {

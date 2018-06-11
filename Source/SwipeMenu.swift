@@ -7,8 +7,7 @@
 //
 
 import UIKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -40,18 +39,18 @@ public enum SwipeMenuSide : Int {
     @objc optional func menu(_ menu: SwipeMenu, indicatorIconForRow row: Int) -> UIImage
 }
 
-private let RightCellIdentifier = "SwipeMenuRightCellIdentifier"
-private let LeftCellIdentifier = "SwipeMenuLeftCellIdentifier"
-private let SwipeMenuZPosition: CGFloat = 997
+private let kRightCellIdentifier = "SwipeMenuRightCellIdentifier"
+private let kLeftCellIdentifier = "SwipeMenuLeftCellIdentifier"
+private let kSwipeMenuZPosition: CGFloat = 997
 
-let DefautColor = UIColor(red:0.13, green:0.08, blue:0.29, alpha:1)
+let kDefautColor = UIColor(red:0.13, green:0.08, blue:0.29, alpha:1)
 
 open class SwipeMenu : UIView {
     
     weak open var dataSource: SwipeMenuDataSource?
     weak open var delegate: SwipeMenuDelegate?
     
-    var indicatorColor = DefautColor {
+    var indicatorColor = kDefautColor {
         didSet{
             MenuCell.SelectColor = indicatorColor
             MenuIndicator.ShapeColor = indicatorColor
@@ -62,7 +61,7 @@ open class SwipeMenu : UIView {
     open fileprivate(set) var openingSide: SwipeMenuSide = .right
     open var menuItemHigh: CGFloat = 60
     
-    fileprivate var cellIdentifier = LeftCellIdentifier
+    fileprivate var cellIdentifier = kLeftCellIdentifier
     fileprivate var preSelectedRow: Int?
     
     fileprivate var menuOriginalY: CGFloat = 0.0
@@ -83,8 +82,8 @@ open class SwipeMenu : UIView {
         v.backgroundColor = .clear
         v.separatorStyle = .none
         
-        v.register(RightMenuCell.self, forCellReuseIdentifier: RightCellIdentifier)
-        v.register(LeftMenuCell.self, forCellReuseIdentifier: LeftCellIdentifier)
+        v.register(RightMenuCell.self, forCellReuseIdentifier: kRightCellIdentifier)
+        v.register(LeftMenuCell.self, forCellReuseIdentifier: kLeftCellIdentifier)
         return v
     }()
     
@@ -117,19 +116,22 @@ open class SwipeMenu : UIView {
         
         isHidden = true
         backgroundColor = .clear
-        layer.zPosition = SwipeMenuZPosition
+        layer.zPosition = kSwipeMenuZPosition
         addSubview(effectV)
         
         leftSidePan.addTarget(self, action: #selector(SwipeMenu.panGes(_:)))
         rightSidePan.addTarget(self, action: #selector(SwipeMenu.panGes(_:)))
-        
+        tableV.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tableV)
         
-        tableV.snp.makeConstraints { (make) in
-            make.top.right.left.equalTo(self)
-            make.height.equalTo(0)
-        }
+        tableTop = tableV.topAnchor.constraint(equalTo: topAnchor)
+        tableV.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        tableV.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        tableHeight = tableV.heightAnchor.constraint(equalToConstant: 0)
     }
+    
+    private var tableTop: NSLayoutConstraint? { willSet{ tableTop?.isActive = false; newValue?.isActive = true } }
+    private var tableHeight: NSLayoutConstraint? { willSet{ tableHeight?.isActive = false; newValue?.isActive = true } }
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -140,20 +142,15 @@ open class SwipeMenu : UIView {
         
         superV.addSubview(indicator)
         
-        snp.makeConstraints { (make) in
-            make.edges.equalTo(superV)
-        }
-        
-        tableV.snp.updateConstraints { (make) in
-            make.height.equalTo(menuItemHigh * CGFloat( itemNumber ))
-        }
+        edgesEqualTo(constant: superV)
+        tableHeight = tableV.heightAnchor.constraint(equalToConstant: menuItemHigh * CGFloat( itemNumber ))
         
         superV.addGestureRecognizer(leftSidePan)
         superV.addGestureRecognizer(rightSidePan)
     }
     
     fileprivate func updateMenuTable(_ y: CGFloat) {
-        tableV.snp.updateConstraints { $0.top.equalTo(y) }
+        tableTop = tableV.topAnchor.constraint(equalTo: topAnchor, constant: y)
     }
     
     open func showMenu() {
@@ -175,7 +172,7 @@ open class SwipeMenu : UIView {
 
     func sideChanged() {
         openingSide = openingSide.reverse
-        cellIdentifier = openingSide == .left ? RightCellIdentifier:LeftCellIdentifier
+        cellIdentifier = openingSide == .left ? kRightCellIdentifier:kLeftCellIdentifier
         tableV.reloadData()
     }
     
@@ -306,11 +303,11 @@ extension SwipeMenu: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension SwipeMenu: UIGestureRecognizerDelegate {
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-}
+//extension SwipeMenu: UIGestureRecognizerDelegate {
+//    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return true
+//    }
+//}
 
 private extension UIImage {
     func changeImage(_ color: UIColor) -> UIImage {

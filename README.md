@@ -13,9 +13,10 @@ SwipeMenu is a simple, strong, fast menu and also easy to use in your iOS app.
 
 ## Requirements
 
-- iOS 8.0+
+- iOS 9.0+
 - Xcode 8.0
 - Swift 3.1
+ps: Because of `NSLayoutAnchor`, so it up to iOS 9.0
 
 ## Installation
 

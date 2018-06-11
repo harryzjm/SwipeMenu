@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     var menu: SwipeMenu = SwipeMenu()
     
-    let names = ["Facebook", "Apple", "Microsoft", "Tencent", "Twitter", "Github"]
+    let names = ["Apple", "Microsoft", "Facebook", "Twitter", "Github", "Tencent"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

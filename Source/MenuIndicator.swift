@@ -8,18 +8,15 @@
 
 import Foundation
 import UIKit
-import SnapKit
 
-private let MenuIndicatorZPosition: CGFloat = 998
+private let kMenuIndicatorZPosition: CGFloat = 998
 
 class MenuIndicator : UIView {
     fileprivate var imageView = UIImageView()
     
     var size = CGSize(width: 44, height: 40)
-    static var ShapeColor = DefautColor
+    static var ShapeColor = kDefautColor
     
-    fileprivate var rightConstraint: Constraint?
-    fileprivate var leftConstraint: Constraint?
     fileprivate var edgeWidth: CGFloat { return rint( size.width * 0.382 ) }
     
     override func draw(_ frame: CGRect) {
@@ -32,15 +29,16 @@ class MenuIndicator : UIView {
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         backgroundColor = .clear
-        layer.zPosition = MenuIndicatorZPosition
+        layer.zPosition = kMenuIndicatorZPosition
         
         imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
-        imageView.snp.makeConstraints { (make) in
-            let wh = min(size.width, size.height) * 0.618
-            make.width.height.equalTo(wh)
-            make.center.equalTo(self)
-        }
+        let wh = min(size.width, size.height) * 0.618
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.widthAnchor.constraint(equalToConstant: wh).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: wh).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
     }
     
@@ -48,19 +46,21 @@ class MenuIndicator : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    fileprivate var indicatorLeft: NSLayoutConstraint? { willSet{ indicatorLeft?.isActive = false; newValue?.isActive = true } }
+    fileprivate var indicatorRight: NSLayoutConstraint? { willSet{ indicatorRight?.isActive = false; newValue?.isActive = true } }
+    fileprivate var indicatorTop: NSLayoutConstraint? { willSet{ indicatorTop?.isActive = false; newValue?.isActive = true } }
+    
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         guard let superV = superview else { return }
         
-        snp.makeConstraints { (make) in
-            make.top.equalTo(superV)
-            make.size.equalTo(size)
-            
-            leftConstraint = make.left.equalTo(superV).offset(-edgeWidth).constraint
-            rightConstraint = make.right.equalTo(superV).offset(edgeWidth).constraint
-        }
-        leftConstraint?.deactivate()
-        
+        translatesAutoresizingMaskIntoConstraints = false
+        indicatorTop = topAnchor.constraint(equalTo: superV.topAnchor)
+        widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        indicatorLeft = leftAnchor.constraint(equalTo: superV.leftAnchor, constant: -edgeWidth)
+        indicatorLeft?.isActive = false
+        indicatorRight = rightAnchor.constraint(equalTo: superV.rightAnchor, constant: edgeWidth)
     }
 }
 
@@ -79,7 +79,7 @@ extension MenuIndicator {
         case .origin:
             m_animate(middle:size.width, final: edgeWidth, side: side)
         case .y(let y):
-            snp.updateConstraints { $0.top.equalTo(y) }
+            indicatorTop?.constant = y
         case .edge:
             m_animate(middle:edgeWidth, final: 0.0, side: side)
         case .show(let width):
@@ -89,23 +89,23 @@ extension MenuIndicator {
     
     fileprivate func m_animate(_ initial: CGFloat? = nil,  middle: CGFloat, final: CGFloat, side: SwipeMenuSide) {
         guard let superV = superview else { return }
-        (side == .left ? rightConstraint:leftConstraint)?.deactivate()
-        guard let constraint = side == .left ? leftConstraint:rightConstraint else { return }
-        constraint.activate()
+        (side == .left ? indicatorRight:indicatorLeft)?.isActive = false
+        guard let constraint = side == .left ? indicatorLeft:indicatorRight else { return }
+        constraint.isActive = true
         
         if let initialValue = initial {
-            constraint.update(offset: initialValue)
+            constraint.constant = initialValue
             superV.layoutIfNeeded()
         }
         
         let middleVlaue = middle * CGFloat( side.rawValue )
         let finalValue = final * CGFloat( side.rawValue )
         
-        constraint.update(offset: middleVlaue)
+        constraint.constant = middleVlaue
         UIView.animate(withDuration: 0.2, delay:0, options: [.curveEaseIn], animations: { () -> Void in
             superV.layoutIfNeeded()
         }) { (finished) -> Void in
-            constraint.update(offset: finalValue)
+            constraint.constant = finalValue
             UIView.animate(withDuration: 0.3, delay:0, options: [.curveEaseOut], animations: { () -> Void in
                 superV.layoutIfNeeded()
                 }, completion: nil)

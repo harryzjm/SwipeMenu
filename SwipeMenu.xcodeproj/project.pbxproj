@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3036C4B41EEA7B6200A6726A /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036C4B31EEA7B6200A6726A /* UIView+Layout.swift */; };
 		30685B111D1943F0006CACCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30685B101D1943F0006CACCB /* AppDelegate.swift */; };
 		30685B131D1943F0006CACCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30685B121D1943F0006CACCB /* ViewController.swift */; };
 		30685B181D1943F0006CACCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30685B171D1943F0006CACCB /* Assets.xcassets */; };
 		30685B241D194409006CACCB /* SwipeMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 30685B221D194409006CACCB /* SwipeMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		30685B371D194669006CACCB /* SwipeMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30685AFF1D1943CE006CACCB /* SwipeMenu.framework */; };
 		30685B381D194669006CACCB /* SwipeMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 30685AFF1D1943CE006CACCB /* SwipeMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3080E0531EC9909F002876FD /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3080E0521EC9909F002876FD /* SnapKit.framework */; };
-		3080E0541EC990A6002876FD /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3080E0521EC9909F002876FD /* SnapKit.framework */; };
-		3080E0551EC990A6002876FD /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3080E0521EC9909F002876FD /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60BC34121D19790E00FCCF2F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BC340F1D19790E00FCCF2F /* MenuCell.swift */; };
 		60BC34131D19790E00FCCF2F /* MenuIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BC34101D19790E00FCCF2F /* MenuIndicator.swift */; };
 		60BC34141D19790E00FCCF2F /* SwipeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BC34111D19790E00FCCF2F /* SwipeMenu.swift */; };
@@ -39,7 +37,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				30685B381D194669006CACCB /* SwipeMenu.framework in Embed Frameworks */,
-				3080E0551EC990A6002876FD /* SnapKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3036C4B31EEA7B6200A6726A /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		30685AFF1D1943CE006CACCB /* SwipeMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwipeMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30685B0E1D1943F0006CACCB /* Example-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30685B101D1943F0006CACCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3080E0531EC9909F002876FD /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,7 +73,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				30685B371D194669006CACCB /* SwipeMenu.framework in Frameworks */,
-				3080E0541EC990A6002876FD /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +115,7 @@
 				60BC340F1D19790E00FCCF2F /* MenuCell.swift */,
 				60BC34101D19790E00FCCF2F /* MenuIndicator.swift */,
 				60BC34111D19790E00FCCF2F /* SwipeMenu.swift */,
+				3036C4B31EEA7B6200A6726A /* UIView+Layout.swift */,
 				30685B221D194409006CACCB /* SwipeMenu.h */,
 				60EAAEFD1D19800E006927E7 /* Supporting Files */,
 			);
@@ -256,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3036C4B41EEA7B6200A6726A /* UIView+Layout.swift in Sources */,
 				60BC34131D19790E00FCCF2F /* MenuIndicator.swift in Sources */,
 				60BC34121D19790E00FCCF2F /* MenuCell.swift in Sources */,
 				60BC34141D19790E00FCCF2F /* SwipeMenu.swift in Sources */,
@@ -386,7 +384,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SM.SwipeMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -409,7 +407,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SM.SwipeMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -430,7 +428,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "Example-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SM.Example-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -450,7 +448,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "Example-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SM.Example-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
