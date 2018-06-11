@@ -5,6 +5,7 @@
 Swipe Menu
 ===============
 
+[![Travis CI](https://travis-ci.org/harryzjm/SwipeMenu.svg?branch=master)](https://travis-ci.org)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 SwipeMenu is a simple, strong, fast menu and also easy to use in your iOS app.  
@@ -88,7 +89,7 @@ SwipeMenuDelegate will be used to select action.
 
 SwipeMenu is released under the MIT license. See LICENSE for details.
 
-##  Author😬  
+##  Author😀  
 
 🇨🇳[Hares - https://github.com/harryzjm](https://github.com/harryzjm)  
 Email: **angel-i@outlook.com**

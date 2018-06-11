@@ -28,6 +28,15 @@ class MenuIndicator : UIView {
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        initialize()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialize()
+    }
+    
+    func initialize() {
         backgroundColor = .clear
         layer.zPosition = kMenuIndicatorZPosition
         
@@ -39,11 +48,6 @@ class MenuIndicator : UIView {
         imageView.heightAnchor.constraint(equalToConstant: wh).isActive = true
         imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     fileprivate var indicatorLeft: NSLayoutConstraint? { willSet{ indicatorLeft?.isActive = false; newValue?.isActive = true } }
@@ -87,7 +91,7 @@ extension MenuIndicator {
         }
     }
     
-    fileprivate func m_animate(_ initial: CGFloat? = nil,  middle: CGFloat, final: CGFloat, side: SwipeMenuSide) {
+    private func m_animate(_ initial: CGFloat? = nil,  middle: CGFloat, final: CGFloat, side: SwipeMenuSide) {
         guard let superV = superview else { return }
         (side == .left ? indicatorRight:indicatorLeft)?.isActive = false
         guard let constraint = side == .left ? indicatorLeft:indicatorRight else { return }

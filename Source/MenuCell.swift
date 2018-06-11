@@ -9,8 +9,8 @@
 import UIKit
 
 class LeftMenuCell: MenuCell {
-    fileprivate override func configCell() {
-        super.configCell()
+    fileprivate override func initialize() {
+        super.initialize()
         iconV.translatesAutoresizingMaskIntoConstraints = false
         iconV.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         iconV.leftAnchor.constraint(equalTo: leftAnchor, constant: margin).isActive = true
@@ -26,8 +26,8 @@ class LeftMenuCell: MenuCell {
 }
 
 class RightMenuCell: MenuCell {
-    fileprivate override func configCell() {
-        super.configCell()
+    fileprivate override func initialize() {
+        super.initialize()
         titleLb.textAlignment = .right
         
         iconV.translatesAutoresizingMaskIntoConstraints = false
@@ -67,17 +67,18 @@ open class MenuCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configCell()
+        initialize()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        configCell()
+        initialize()
     }
     
-    fileprivate func configCell() {
+    fileprivate func initialize() {
         backgroundColor = .clear
         addSubview(iconV)
         addSubview(titleLb)
     }
+    
 }
