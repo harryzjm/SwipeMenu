@@ -1,11 +1,6 @@
-<p align="center" >
-  <img src="./Logo/hummingbird.jpg">
-</p>  
-
 Swipe Menu
 ===============
 
-[![Travis CI](https://travis-ci.org/harryzjm/SwipeMenu.svg?branch=master)](https://travis-ci.org)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 SwipeMenu is a simple, strong, fast menu and also easy to use in your iOS app.  
@@ -14,10 +9,9 @@ SwipeMenu is a simple, strong, fast menu and also easy to use in your iOS app.
 
 ## Requirements
 
-- iOS 9.0+
-- Xcode 8.0
-- Swift 3.1
-ps: Because of `NSLayoutAnchor`, so it up to iOS 9.0
+- iOS 12.0+
+- Xcode 15.0
+- Swift 5
 
 ## Installation
 

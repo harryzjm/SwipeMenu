@@ -44,11 +44,11 @@ class RightMenuCell: MenuCell {
     }
 }
 
-enum CellStyle {
-    case normal, highlighted, selected
-}
-
 open class MenuCell: UITableViewCell {
+    enum CellStyle {
+        case normal, highlighted, selected
+    }
+
     static var SelectColor = kDefautColor
     fileprivate let margin: CGFloat = 10
     
@@ -65,7 +65,7 @@ open class MenuCell: UITableViewCell {
     let iconV = UIImageView()
     let titleLb = UILabel()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initialize()
     }
